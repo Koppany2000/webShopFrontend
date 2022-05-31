@@ -3,9 +3,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Order } from 'src/app/models/Order';
-import { OrderStatus } from 'src/app/OrderStatus';
+import { OrderStatus } from 'src/app/enum/OrderStatus';
 import { JwtResponse } from 'src/app/response/JwtResponse';
-import { Role } from 'src/app/Role';
+import { Role } from 'src/app/enum/Role';
 import { OrderService } from 'src/app/services/order.service';
 import { UserService } from 'src/app/services/user.service';
 

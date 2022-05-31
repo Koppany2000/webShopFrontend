@@ -11,7 +11,7 @@ import { ProductEditComponent } from './pages/product-edit/product-edit.componen
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { UserEditComponent } from './pages/user-edit/user-edit.component';
-import { Role } from './Role';
+import { Role } from './enum/Role';
 import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [

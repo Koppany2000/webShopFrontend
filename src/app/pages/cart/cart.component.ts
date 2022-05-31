@@ -1,9 +1,9 @@
 import { AfterContentChecked, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { debounceTime, Subject, Subscription, switchMap } from 'rxjs';
+import { Role } from 'src/app/enum/Role';
 import { ProductInOrder } from 'src/app/models/productInOrder';
 import { JwtResponse } from 'src/app/response/JwtResponse';
-import { Role } from 'src/app/Role';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 

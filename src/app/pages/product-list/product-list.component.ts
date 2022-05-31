@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CategoryType } from 'src/app/Categorytype';
+import { CategoryType } from 'src/app/enum/Categorytype';
 import { ProductInfo } from 'src/app/models/productInfo';
-import { ProductStatus } from 'src/app/ProductStatus';
+import { ProductStatus } from 'src/app/enum/ProductStatus';
 import { JwtResponse } from 'src/app/response/JwtResponse';
-import { Role } from 'src/app/Role';
+import { Role } from 'src/app/enum/Role';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 

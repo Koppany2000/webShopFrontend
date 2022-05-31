@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JwtResponse } from 'src/app/response/JwtResponse';
-import { Role } from 'src/app/Role';
+import { Role } from 'src/app/enum/Role';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
