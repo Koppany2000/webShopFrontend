@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CategoryType } from 'src/app/enum/Categorytype';
 import { ProductInfo } from 'src/app/models/productInfo';
@@ -8,22 +8,25 @@ import { JwtResponse } from 'src/app/response/JwtResponse';
 import { Role } from 'src/app/enum/Role';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
-
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  selector: 'app-product-delete',
+  templateUrl: './product-delete.component.html',
+  styleUrls: ['./product-delete.component.css']
 })
-export class ProductListComponent implements OnInit, OnDestroy {
+export class ProductDeleteComponent implements OnInit , OnDestroy {
 
   constructor(private userService: UserService,
               private productService: ProductService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router:Router) {
   }
   currentUserSubscription:Subscription;
   Role = Role;
   currentUser: JwtResponse;
+  indeterminate = false;
+  setOfCheckedId = new Set<string>();
   page: any;
+  checked=false;
   CategoryType = CategoryType;
   ProductStatus = ProductStatus;
   private querySub: Subscription;
@@ -38,6 +41,33 @@ export class ProductListComponent implements OnInit, OnDestroy {
     });
   }
 
+  
+  onItemChecked(id: string, checked: boolean): void {
+    this.updateCheckedSet(id, checked);
+    console.log(checked)
+    this.refreshCheckedStatus();
+  }
+  updateCheckedSet(id: string, checked: boolean): void {
+    if (checked) {
+      this.setOfCheckedId.add(id);
+    } else {
+      this.setOfCheckedId.delete(id);
+    }
+    console.log(this.setOfCheckedId)
+  }
+  refreshCheckedStatus(): void {
+    const listOfEnabledData =this.page.content;
+    this.checked = listOfEnabledData.every(({ productId }) => this.setOfCheckedId.has(productId));
+    this.indeterminate = listOfEnabledData.some(({ productId }) => this.setOfCheckedId.has(productId)) && !this.checked;
+   
+  }
+  onAllChecked(checked: boolean): void {
+    this.page.content
+      .forEach(({ id }) => this.updateCheckedSet(id, checked));
+    this.refreshCheckedStatus();
+  }
+
+  
   ngOnDestroy(): void {
       this.querySub.unsubscribe();
   }
@@ -58,6 +88,20 @@ export class ProductListComponent implements OnInit, OnDestroy {
               this.page = page;
           });
 
+  }
+  async delete(){
+    const requestData = this.page.content.filter(data => this.setOfCheckedId.has(data.productId));
+    requestData.forEach(element => {
+      console.log(element.productId)
+      this.productService.delelte(element).subscribe(data =>{
+        setTimeout(() => {
+          
+        }, 20);
+
+      })
+    });
+    this.router.navigate(['/seller/product']);
+   
   }
 
 

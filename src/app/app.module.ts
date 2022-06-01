@@ -22,6 +22,8 @@ import { ProductEditComponent } from './pages/product-edit/product-edit.componen
 import { CommonModule } from '@angular/common';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { ProductAddComponent } from './pages/product-add/product-add.component';
+import { ProductDeleteComponent } from './pages/product-delete/product-delete.component';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { ProductAddComponent } from './pages/product-add/product-add.component';
     ProductEditComponent,
     ProductListComponent,
     ProductAddComponent,
+    ProductDeleteComponent,
+
    
   ],
   imports: [
@@ -47,6 +51,7 @@ import { ProductAddComponent } from './pages/product-add/product-add.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
+    NzCheckboxModule,
     CommonModule
   ],
   providers: [CookieService,

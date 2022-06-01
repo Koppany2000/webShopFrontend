@@ -13,33 +13,33 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { UserEditComponent } from './pages/user-edit/user-edit.component';
 import { Role } from './enum/Role';
 import { AuthGuard } from './_guards/auth.guard';
+import { ProductDeleteComponent } from './pages/product-delete/product-delete.component';
 
 const routes: Routes = [
-
-  {path: '', redirectTo: '/product', pathMatch: 'full'},
-  {path: 'product/:id', component: ProductDetailComponent},
-  {path: 'category/:id', component: CardComponent},
-  {path: 'product', component: CardComponent},
-  {path: 'category', component: CardComponent},
-  {path: 'register', component: SignupComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'seller/product/add', component: ProductAddComponent, canActivate: [AuthGuard], data: {roles: [Role.Manager, Role.Employee]}},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LoginComponent},
+  {path: 'product', component: CardComponent},
+  {path: 'category', component: CardComponent},
   {path: 'success', component: SignupComponent},
+  {path: 'register', component: SignupComponent},
+  {path: 'category/:id', component: CardComponent},
+  {path: '', redirectTo: '/product', pathMatch: 'full'},
+  {path: 'product/:id', component: ProductDetailComponent},
+  {path: 'seller', redirectTo: 'seller/product', pathMatch: 'full'},
+  {path: 'order', component: OrderComponent, canActivate: [AuthGuard]},
   {path: 'profile', component: UserEditComponent, canActivate: [AuthGuard]},
   {path: 'order/:id', component: OrderDetailComponent, canActivate: [AuthGuard]},
-  {path: 'order', component: OrderComponent, canActivate: [AuthGuard]},
-  {path: 'seller', redirectTo: 'seller/product', pathMatch: 'full'},
+  {path: 'seller/product/:id/new', component: ProductEditComponent, canActivate: [AuthGuard], data: {roles: [Role.Employee]}},
   {path: 'seller/product', component: ProductListComponent, canActivate: [AuthGuard], data: {roles: [Role.Manager, Role.Employee]}},
+  {path: 'seller/product/add', component: ProductAddComponent, canActivate: [AuthGuard], data: {roles: [Role.Manager, Role.Employee]}},
   {path: 'seller/product/:id/edit', component: ProductEditComponent, canActivate: [AuthGuard], data: {roles: [Role.Manager, Role.Employee]}},
-{path: 'seller/product/:id/new', component: ProductEditComponent, canActivate: [AuthGuard], data: {roles: [Role.Employee]}},
-
-];
+  {path: 'seller/product/delete', component: ProductDeleteComponent, canActivate: [AuthGuard], data: {roles: [Role.Manager, Role.Employee]}},];
 
 @NgModule({
   declarations: [],
   imports: [RouterModule.forRoot(routes)],
+
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
