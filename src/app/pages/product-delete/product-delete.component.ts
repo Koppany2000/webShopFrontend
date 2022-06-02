@@ -44,7 +44,6 @@ export class ProductDeleteComponent implements OnInit , OnDestroy {
   
   onItemChecked(id: string, checked: boolean): void {
     this.updateCheckedSet(id, checked);
-    console.log(checked)
     this.refreshCheckedStatus();
   }
   updateCheckedSet(id: string, checked: boolean): void {
@@ -53,7 +52,6 @@ export class ProductDeleteComponent implements OnInit , OnDestroy {
     } else {
       this.setOfCheckedId.delete(id);
     }
-    console.log(this.setOfCheckedId)
   }
   refreshCheckedStatus(): void {
     const listOfEnabledData =this.page.content;
@@ -89,18 +87,15 @@ export class ProductDeleteComponent implements OnInit , OnDestroy {
           });
 
   }
-  async delete(){
+  delete(){
     const requestData = this.page.content.filter(data => this.setOfCheckedId.has(data.productId));
     requestData.forEach(element => {
-      console.log(element.productId)
       this.productService.delelte(element).subscribe(data =>{
-        setTimeout(() => {
-          
-        }, 20);
-
+        this.router.navigate(['/seller/product']);
+        
       })
     });
-    this.router.navigate(['/seller/product']);
+    
    
   }
 
